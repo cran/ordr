@@ -149,7 +149,6 @@ as annotations to the appropriate matrix factors:[^7]
 #> 4 -2.29  0.595 -0.0910     | 4 setosa 
 #> 5 -2.38 -0.645 -0.0157     | 5 setosa 
 #> # … with 145 more rows
-#> # ℹ Use `print(n = ...)` to see more rows
 #> # 
 #> # Columns (standard): [ 4 x 4 | 3 ]
 #>      PC1     PC2    PC3 ... |   name         center scale
@@ -183,7 +182,6 @@ iris_meta <- data.frame(
 #> 4 -2.29  0.595 -0.0910     | 4 setosa       1 diploid       2
 #> 5 -2.38 -0.645 -0.0157     | 5 setosa       1 diploid       2
 #> # … with 145 more rows
-#> # ℹ Use `print(n = ...)` to see more rows
 #> # 
 #> # Columns (standard): [ 4 x 4 | 3 ]
 #>      PC1     PC2    PC3 ... |   name         center scale
@@ -289,14 +287,17 @@ Conduct](https://github.com/corybrunson/ordr/blob/main/CODE_OF_CONDUCT.md).
 This package was originally inspired by the **ggbiplot** extension
 developed by [Vincent Q. Vu](https://github.com/vqv/ggbiplot), [Richard
 J Telford](https://github.com/richardjtelford/ggbiplot), and [Vilmantas
-Gegzna](https://github.com/forked-packages/ggbiplot), among others. So
-far as i know, it first brought biplots into the **tidyverse**
-framework. The motivation to unify a variety of ordination methods came
-from several books and articles by [Michael
+Gegzna](https://github.com/forked-packages/ggbiplot), among others. It
+probably first brought biplots into the **tidyverse** framework. The
+motivation to unify a variety of ordination methods came from several
+books and articles by [Michael
 Greenacre](https://www.fbbva.es/microsite/multivariate-statistics/resources.html),
 in particular [*Biplots in
 Practice*](https://www.fbbva.es/microsite/multivariate-statistics/resources.html#biplots).
-Thomas Lin Pedersen’s
+Several answers at CrossValidated, in particular by
+[amoeba](https://stats.stackexchange.com/users/28666/amoeba) and
+[ttnphns](https://stats.stackexchange.com/users/3277/ttnphns), provided
+theoretical insights and informed design choices. Thomas Lin Pedersen’s
 [**tidygraph**](https://github.com/thomasp85/tidygraph) prequel to
 **ggraph** finally induced the shift from the downstream generation of
 scatterplots to the upstream handling and manipulating of ordination
@@ -305,7 +306,7 @@ the monograph
 [*Biplots*](https://www.google.com/books/edition/Biplots/lTxiedIxRpgC)
 and the textbook [*Understanding
 Biplots*](https://www.wiley.com/en-us/Understanding+Biplots-p-9780470012550)
-by John C. Gower, David J. Hand, Sugnet Gardner Lubbe, and Niel J. Le
+by John C. Gower, David J. Hand, Sugnet Gardner–Lubbe, and Niel J. Le
 Roux, and by the volume [*Principal Components
 Analysis*](https://link.springer.com/book/10.1007/b98835) by I. T.
 Jolliffe.
@@ -316,8 +317,8 @@ Jolliffe.
     978-84-923846.
     <https://www.fbbva.es/microsite/multivariate-statistics/biplots.html>
 
-[^2]: The term *ordination* is most prevalent among ecologists; to my
-    knowledge, no catch-all term is in common use outside ecology.
+[^2]: The term *ordination* is most prevalent among ecologists; no
+    catch-all term seems to be in common use outside ecology.
 
 [^3]: This is not a hard rule: PCA is often used to compress data before
     clustering, and LDA uses dimension reduction to perform

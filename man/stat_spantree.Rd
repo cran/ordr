@@ -9,20 +9,18 @@ stat_spantree(
   data = NULL,
   geom = "segment",
   position = "identity",
-  engine = "vegan",
+  engine = "mlpack",
   method = "euclidean",
   show.legend = NA,
   inherit.aes = TRUE,
-  check.aes = TRUE,
-  check.param = TRUE,
   ...
 )
 }
 \arguments{
-\item{mapping}{Set of aesthetic mappings created by \code{\link[ggplot2:aes]{aes()}} or
-\code{\link[ggplot2:aes_]{aes_()}}. If specified and \code{inherit.aes = TRUE} (the
-default), it is combined with the default mapping at the top level of the
-plot. You must supply \code{mapping} if there is no plot mapping.}
+\item{mapping}{Set of aesthetic mappings created by \code{\link[ggplot2:aes]{aes()}}. If specified and
+\code{inherit.aes = TRUE} (the default), it is combined with the default mapping
+at the top level of the plot. You must supply \code{mapping} if there is no plot
+mapping.}
 
 \item{data}{The data to be displayed in this layer. There are three
 options:
@@ -39,16 +37,20 @@ the plot data. The return value must be a \code{data.frame}, and
 will be used as the layer data. A \code{function} can be created
 from a \code{formula} (e.g. \code{~ head(.x, 10)}).}
 
-\item{geom}{The geometric object to use display the data}
+\item{geom}{The geometric object to use to display the data, either as a
+\code{ggproto} \code{Geom} subclass or as a string naming the geom stripped of the
+\code{geom_} prefix (e.g. \code{"point"} rather than \code{"geom_point"})}
 
-\item{position}{Position adjustment, either as a string, or the result of
-a call to a position adjustment function.}
+\item{position}{Position adjustment, either as a string naming the adjustment
+(e.g. \code{"jitter"} to use \code{position_jitter}), or the result of a call to a
+position adjustment function. Use the latter if you need to change the
+settings of the adjustment.}
 
 \item{engine}{A single character string specifying the package implementation
-to use; either \code{"vegan"} or \code{"mlpack"}.}
+to use; \code{"mlpack"}, \code{"vegan"}, or \code{"ade4"}.}
 
-\item{method}{Passed to \code{\link[stats:dist]{stats::dist()}} if \code{engine} is \code{"vegan"}, ignored if
-\code{"mlpack"}.}
+\item{method}{Passed to \code{\link[stats:dist]{stats::dist()}} if \code{engine} is \code{"vegan"} or \code{"ade4"},
+ignored if \code{"mlpack"}.}
 
 \item{show.legend}{logical. Should this layer be included in the legends?
 \code{NA}, the default, includes if any aesthetics are mapped.
@@ -60,10 +62,6 @@ display.}
 rather than combining with them. This is most useful for helper functions
 that define both data and aesthetics and shouldn't inherit behaviour from
 the default plot specification, e.g. \code{\link[ggplot2:borders]{borders()}}.}
-
-\item{check.aes, check.param}{If \code{TRUE}, the default, will check that
-supplied parameters and aesthetics are understood by the \code{geom} or
-\code{stat}. Use \code{FALSE} to suppress the checks.}
 
 \item{...}{Additional arguments passed to \code{\link[ggplot2:layer]{ggplot2::layer()}}.}
 }
@@ -79,9 +77,9 @@ between these poirs in the two dimensions \code{x} and \code{y}.
 A minimum spanning tree (MST) on the point cloud \eqn{X} is a minimal
 connected graph on \eqn{X} with the smallest possible sum of distances (or
 dissimilarities) between linked points. These layers call \code{\link[stats:dist]{stats::dist()}} to
-calculate a distance/dissimilarity object and \code{\link[vegan:spantree]{vegan::spantree()}} to
-calculate the MST. The result is formatted with position aesthetics readable
-by \code{\link[ggplot2:geom_segment]{ggplot2::geom_segment()}}.
+calculate a distance/dissimilarity object and an engine from \strong{mlpack},
+\strong{vegan}, or \strong{ade4} to calculate the MST. The result is formatted with
+position aesthetics readable by \code{\link[ggplot2:geom_segment]{ggplot2::geom_segment()}}.
 
 An MST calculated on \code{x} and \code{y} reflects the distances among the points in
 \eqn{X} in the reduced-dimension plane of the biplot. In contrast, one
@@ -125,6 +123,7 @@ In either case, the stat layer returns a data frame with position aesthetics
 }
 
 \examples{
+\dontrun{
 # classical multidimensional scaling of road distances between European cities
 euro_mds <- ordinate(eurodist, cmdscale_ord, k = 11)
 
@@ -134,7 +133,7 @@ euro_mds \%>\%
   negate_ord("PCo2") \%>\%
   ggbiplot() +
   stat_cols_spantree(
-    ord_aes(euro_mds), check.aes = FALSE, engine = "mlpack",
+    ord_aes(euro_mds), engine = "mlpack",
     alpha = .5, linetype = "dotted"
   ) +
   geom_cols_text(aes(label = name), size = 3) +
@@ -142,6 +141,7 @@ euro_mds \%>\%
     "MDS biplot of road distances between European cities",
     "Dotted segments constitute the minimal spanning tree"
   )
+}
 }
 \references{
 Jolliffe IT (2002) \emph{Principal Component Analysis}, Second Edition.

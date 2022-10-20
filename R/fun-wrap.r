@@ -41,18 +41,18 @@
 #' @inheritParams stats::cancor
 #' @param scores Logical; whether to return canonical scores and structure
 #'   correlations.
-#' @example inst/examples/ex-fun-wrap-glass.r
 #' @return Objects slightly modified from the outputs of the original functions,
 #'   with new '*-ord' classes.
+#' @example inst/examples/ex-fun-wrap-glass.r
 NULL
 
 #' @rdname wrap-ord
 #' @export
 eigen_ord <- function(x, symmetric = isSymmetric.matrix(x)) {
-  res <- eigen(x = x, only.values = FALSE)
+  res <- eigen(x = x, symmetric = symmetric, only.values = FALSE)
   rownames(res$vectors) <- rownames(x)
   colnames(res$vectors) <- paste0("EV", seq_along(res$values))
-  class(res) <- "eigen_ord"
+  class(res) <- c("eigen_ord", class(res))
   res
 }
 

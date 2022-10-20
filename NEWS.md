@@ -1,3 +1,18 @@
+# ordr 0.1.1
+
+## `linewidth` aesthetic (breaking change)
+
+An upcoming release of *ggplot2* controls stroke width using the new `linewidth` aesthetic rather than `size`. This *ordr* release adapts to this change internally for `GeomUnitCircle` and by updating row and column layers automatically adapted from *ggplot2*. (#50)
+
+## class 'eigen'
+
+Methods are added for the 'eigen' class returned by `eigen()`, and the internal `eigen_ord()` function and its methods are updated accordingly.
+
+## list tidiers (breaking change)
+
+The previous version extended the 'list' method for *broom*'s `tidy()` and `glance()` functions to recognize the output of `cmdscale()` and of `cancor()`.
+These have been spun off to a nascent helper package, *broom.list*, to reduce size and prevent attachment warnings.
+
 # ordr 0.1.0
 
 In addition to minor changes, the following substantive changes are made from v0.0.2:
@@ -20,7 +35,7 @@ The `ordinate()` function is now a generic with methods for four data classes.
 
 ## ggbiplot
 
-The logical `prediction` parameter is replaced with the character-valued `axis.type`, based on the `ax.type` parameter used in **UBbipl** (Gower, Lubbe, & le Roux, 2011).
+The logical `prediction` parameter is replaced with the character-valued `axis.type`, based on the `ax.type` parameter used in **UBbipl** (Gower, Gardner--Lubbe, & le Roux, 2011).
 
 ## tests
 

@@ -40,9 +40,9 @@
 #'
 #' The `axis.type` parameter controls whether the biplot is interpolative or
 #' predictive, though predictive biplots are still experimental and limited to
-#' linear methods like PCA. Gower & Hand (1996) and Gower, Lubbe, & le Roux
-#' (2011) thoroughly explain the construction and interpretation of predictive
-#' biplots.
+#' linear methods like PCA. Gower & Hand (1996) and Gower, Gardner--Lubbe, & le
+#' Roux (2011) thoroughly explain the construction and interpretation of
+#' predictive biplots.
 #' 
 
 #' @template biplot-layers
@@ -117,7 +117,8 @@ ggbiplot <- function(
   if (axis.type == "predictive") {
     
     # -+- only linear ordinations for now -+-
-    if (! ord_class %in% c("eigen_ord", "svd_ord", "prcomp", "princomp")) {
+    linear_classes <- c("eigen", "eigen_ord", "svd_ord", "prcomp", "princomp")
+    if (! ord_class %in% linear_classes) {
       warning("Predictive biplots are only implemented for linear methods ",
               "(ED, SVD, PCA).")
     } else {

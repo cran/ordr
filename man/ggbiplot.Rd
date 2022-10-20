@@ -37,9 +37,7 @@ shared coordinates are mapped to, and inertia is conferred entirely onto
 one matrix factor. \strong{NB:} This option is only implemented for linear
 techniques (ED, SVD, & PCA).}
 
-\item{xlim}{Limits for the x and y axes.}
-
-\item{ylim}{Limits for the x and y axes.}
+\item{xlim, ylim}{Limits for the x and y axes.}
 
 \item{expand}{If \code{TRUE}, the default, adds a small expansion factor to
 the limits to ensure that data and axes don't overlap. If \code{FALSE},
@@ -109,9 +107,9 @@ that are processed internally by \code{\link[ggplot2:aes]{ggplot2::aes()}}.
 
 The \code{axis.type} parameter controls whether the biplot is interpolative or
 predictive, though predictive biplots are still experimental and limited to
-linear methods like PCA. Gower & Hand (1996) and Gower, Lubbe, & le Roux
-(2011) thoroughly explain the construction and interpretation of predictive
-biplots.
+linear methods like PCA. Gower & Hand (1996) and Gower, Gardner--Lubbe, & le
+Roux (2011) thoroughly explain the construction and interpretation of
+predictive biplots.
 }
 \section{Biplot layers}{
 
@@ -191,11 +189,13 @@ mtcars \%>\%
   subset(select = c(cyl, disp, hp, drat, wt, vs, carb)) \%>\%
   scale() \%>\%
   cosine_dist() \%>\%
-  cmdscale(list. = TRUE) \%>\%
-  tidy() \%>\%
-  print() -> mtcars_specs_cmds
+  cmdscale() \%>\%
+  as.data.frame() ->
+  mtcars_specs_cmds
+# names must be consistent with `cmdscale_ord()` below
+names(mtcars_specs_cmds) <- c("PCo1", "PCo2")
 # regress performance measures on principal coordinates
-lm(mtcars_perf ~ as.matrix(mtcars_specs_cmds[, 2:3])) \%>\%
+lm(mtcars_perf ~ as.matrix(mtcars_specs_cmds)) \%>\%
   as_tbl_ord() \%>\%
   augment_ord() \%>\%
   print() -> mtcars_cmds_lm
@@ -232,8 +232,8 @@ iris_pca \%>\%
 \references{
 Gower JC & Hand DJ (1996) \emph{Biplots}. Chapman & Hall, ISBN: 0-412-71630-5.
 
-Gower JC, Lubbe GS, & le Roux NJ (2011) \emph{Understanding Biplots}. Wiley, ISBN:
-978-0-470-01255-0. \url{https://www.wiley.com/go/biplots}
+Gower JC, Gardner--Lubbe S, & le Roux NJ (2011) \emph{Understanding Biplots}.
+Wiley, ISBN: 978-0-470-01255-0. \url{https://www.wiley.com/go/biplots}
 }
 \seealso{
 \code{\link[ggplot2:ggplot2-package]{ggplot2::ggplot2()}}, on which \code{ggbiplot()} is built
