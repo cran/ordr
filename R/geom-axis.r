@@ -154,6 +154,7 @@ GeomAxis <- ggproto(
     parse = FALSE, check_overlap = FALSE,
     na.rm = FALSE
   ) {
+    
     if (! coord$is_linear()) {
       warning("Axes are not yet tailored to non-linear coordinates.")
     }

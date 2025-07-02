@@ -1,6 +1,6 @@
 Package: ordr
 Title: A 'tidyverse' Extension for Ordinations and Biplots
-Version: 0.1.1
+Version: 0.1.2
 Authors@R: c(
   person("Jason Cory", "Brunson", email = "cornelioid@gmail.com",
     role = c("aut", "cre"), comment = c(ORCID = "0000-0003-3126-9494")),
@@ -26,16 +26,16 @@ Description: Ordination comprises several multivariate exploratory and
     methods. It is inspired by and designed to integrate into 'tidyverse'
     workflows provided by Wickham et al (2019) <doi:10.21105/joss.01686>.
 Depends: R (>= 3.3.0), ggplot2
-Imports: rlang, stringr, tidyselect, scales, generics, magrittr,
+Imports: rlang, MASS, stringr, tidyselect, scales, generics, magrittr,
         tibble, tidyr, dplyr, purrr, labeling, ggrepel,
-Suggests: testthat, sessioninfo, gridExtra, MASS, mlpack, vegan,
-        heplots, knitr, rmarkdown
+Suggests: testthat, sessioninfo, gridExtra, mlpack, vegan, heplots,
+        knitr, rmarkdown
 License: GPL-3
 Encoding: UTF-8
 LazyData: true
 URL: https://github.com/corybrunson/ordr
 BugReports: https://github.com/corybrunson/ordr/issues
-RoxygenNote: 7.2.1
+RoxygenNote: 7.3.2
 Collate: 'aaa-.r' 'biplot-key.r' 'biplot.r' 'data.r' 'dplyr-verbs.r'
         'utils.r' 'ord-recoverers.r' 'ord-augmentation.r'
         'ord-conference.r' 'ord-tbl.r' 'fun-lda.r' 'fun-lra.r'
@@ -55,9 +55,10 @@ Collate: 'aaa-.r' 'biplot-key.r' 'biplot.r' 'data.r' 'dplyr-verbs.r'
         'zzz-biplot-stats.r' 'zzz.r'
 VignetteBuilder: knitr
 NeedsCompilation: no
-Packaged: 2022-10-20 16:03:50 UTC; jason.brunson
-Author: Jason Cory Brunson [aut, cre] (<https://orcid.org/0000-0003-3126-9494>),
+Packaged: 2025-07-02 00:13:45 UTC; jasoncorybrunson
+Author: Jason Cory Brunson [aut, cre] (ORCID:
+    <https://orcid.org/0000-0003-3126-9494>),
   Emily Paul [ctb]
 Maintainer: Jason Cory Brunson <cornelioid@gmail.com>
 Repository: CRAN
-Date/Publication: 2022-10-20 20:52:35 UTC
+Date/Publication: 2025-07-02 08:40:06 UTC

@@ -132,13 +132,13 @@ corr <- cor(select(qswur_usa2020, starts_with("rk_")), method = "kendall")
 heatmap(corr, scale = "none")
 
 ## ----multidimensional scaling of variables, fig.width=7, eval=FALSE, echo=FALSE----
-#  corr.eigen <- eigen(corr)
-#  corr.coord <- corr.eigen$vectors %*% diag(sqrt(corr.eigen$values))
-#  plot(corr.coord, pch = NA, asp = 1, xlab = "", ylab = "")
-#  arrows(0, 0, corr.coord[, 1], corr.coord[, 2])
-#  text(corr.coord, labels = rownames(corr))
+# corr.eigen <- eigen(corr)
+# corr.coord <- corr.eigen$vectors %*% diag(sqrt(corr.eigen$values))
+# plot(corr.coord, pch = NA, asp = 1, xlab = "", ylab = "")
+# arrows(0, 0, corr.coord[, 1], corr.coord[, 2])
+# text(corr.coord, labels = rownames(corr))
 
-## ---- fig.width=7-------------------------------------------------------------
+## ----fig.width=7--------------------------------------------------------------
 eigen_ord(corr) %>%
   as_tbl_ord() %>%
   augment_ord() %>%
@@ -161,7 +161,7 @@ c_eigen %>%
   fortify(.matrix = "rows") %>%
   select(-name, -.matrix)
 
-## ---- fig.width=7-------------------------------------------------------------
+## ----fig.width=7--------------------------------------------------------------
 c_eigen %>%
   ggbiplot(aes(x = 2, y = 3)) +
   theme_minimal() +

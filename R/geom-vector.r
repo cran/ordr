@@ -73,6 +73,7 @@ GeomVector <- ggproto(
     lineend = "round", linejoin = "mitre",
     na.rm = FALSE
   ) {
+    
     if (! coord$is_linear()) {
       warning("Vectors are not yet tailored to non-linear coordinates.")
     }

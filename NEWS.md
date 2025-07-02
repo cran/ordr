@@ -1,3 +1,7 @@
+# ordr 0.1.2
+
+This patch prepares for an upcoming *ggplot2* release that overhauls aesthetic mappings (#82). No changes to user experience are anticipated.
+
 # ordr 0.1.1
 
 ## `linewidth` aesthetic (breaking change)

@@ -51,6 +51,7 @@ StatCone <- ggproto(
     data, scales,
     origin = FALSE
   ) {
+    
     ord_cols <- get_ord_aes(data)
     
     # if the data set contains the origin, then the convex hull suffices

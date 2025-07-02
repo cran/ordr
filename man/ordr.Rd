@@ -84,7 +84,7 @@ Multivariate Biological Data} Chapter 7, 215--284. Backhuys Publishers, ISBN
 \url{https://web.archive.org/web/20200221000313/http://ramet.elte.hu/~podani/books.html}
 
 Palmer M \emph{Ordination Methods for Ecologists}. Website, accessed 2019-07-12.
-\url{http://ordination.okstate.edu/}
+\url{https://ordination.okstate.edu/}
 
 Le Roux B & Rouanet H (2004) \emph{Geometric Data Analysis: From Correspondence
 Analysis to Stsructured Data Analysis}. Springer Dordrecht, ISBN:
@@ -102,4 +102,21 @@ Greenacre MJ (2010) \emph{Biplots in Practice}. Fundacion BBVA, ISBN:
 Orlov K (2015) \emph{Answer to} "PCA and Correspondence analysis in their relation
 to Biplot". CrossValidated, accessed 2019-07-12.
 \url{https://stats.stackexchange.com/a/141755/68743}
+}
+\seealso{
+Useful links:
+\itemize{
+  \item \url{https://github.com/corybrunson/ordr}
+  \item Report bugs at \url{https://github.com/corybrunson/ordr/issues}
+}
+
+}
+\author{
+\strong{Maintainer}: Jason Cory Brunson \email{cornelioid@gmail.com} (\href{https://orcid.org/0000-0003-3126-9494}{ORCID})
+
+Other contributors:
+\itemize{
+  \item Emily Paul \email{erpb.71@gmail.com} [contributor]
+}
+
 }

@@ -38,7 +38,7 @@ haireye_svd <- svd(haireye_s)
 diag(1 / sqrt(haireye_r)) %*% haireye_svd$u[, 1:3]
 diag(1 / sqrt(haireye_c)) %*% haireye_svd$v[, 1:3]
 
-## ---- fig.height=6------------------------------------------------------------
+## ----fig.height=6-------------------------------------------------------------
 biplot(
   haireye_ca, type = "symmetric", cex = .8,
   main = "Correspondence analysis of subjects' hair & eye colors"

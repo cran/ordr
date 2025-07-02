@@ -58,6 +58,7 @@ StatCenter <- ggproto(
                            fun.center = NULL, fun.min = NULL, fun.max = NULL,
                            fun.args = list(),
                            na.rm = FALSE) {
+    
     cfun <- make_center_fun(fun.data, fun.center, fun.min, fun.max, fun.args)
     cfun(data)
   }
@@ -103,6 +104,7 @@ StatStar <- ggproto(
                            fun.data = NULL,
                            fun.center = NULL, fun.args = list(),
                            na.rm = FALSE) {
+    
     cfun <- make_center_fun(fun.data, fun.center, NULL, NULL, fun.args)
     cdata <- cfun(data)
     

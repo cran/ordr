@@ -45,6 +45,7 @@ StatScale <- ggproto(
   
   compute_group = function(data, scales,
                            mult = 1) {
+    
     data[, c("x", "y")] <- data[, c("x", "y")] * mult
     data
   }
