@@ -41,6 +41,7 @@ plot.tbl_ord <- function(x, main = deparse(substitute(x)), ...) {
   screeplot(x, main = main, ...)
 }
 
+#' @rdname plot.tbl_ord
 #' @method screeplot tbl_ord
 #' @export
 screeplot.tbl_ord <- function(x, main = deparse(substitute(x)), ...) {
@@ -57,6 +58,7 @@ screeplot.tbl_ord <- function(x, main = deparse(substitute(x)), ...) {
   screeplot.default(x = list(sdev = sdev), main = main, ...)
 }
 
+#' @rdname plot.tbl_ord
 #' @method biplot tbl_ord
 #' @export
 biplot.tbl_ord <- function(x, main = deparse(substitute(x)), ...) {

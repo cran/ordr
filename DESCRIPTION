@@ -1,11 +1,13 @@
 Package: ordr
-Title: A 'tidyverse' Extension for Ordinations and Biplots
-Version: 0.1.2
+Title: A 'Tidyverse' Extension for Ordinations and Biplots
+Version: 0.2.0
 Authors@R: c(
   person("Jason Cory", "Brunson", email = "cornelioid@gmail.com",
     role = c("aut", "cre"), comment = c(ORCID = "0000-0003-3126-9494")),
   person("Emily", "Paul", email = "erpb.71@gmail.com",
-    role = "ctb")
+    role = "ctb"),
+  person("John", "Gracey", email = "jbgracey6@gmail.com",
+    role = "aut")
   )
 Description: Ordination comprises several multivariate exploratory and
     explanatory techniques with theoretical foundations in geometric data
@@ -23,25 +25,25 @@ Description: Ordination comprises several multivariate exploratory and
     <doi:10.1093/biomet/58.3.453>, is called a biplot.
     'ordr' provides inspection, extraction, manipulation, and visualization
     tools for several popular ordination classes supported by a set of recovery
-    methods. It is inspired by and designed to integrate into 'tidyverse'
+    methods. It is inspired by and designed to integrate into 'Tidyverse'
     workflows provided by Wickham et al (2019) <doi:10.21105/joss.01686>.
 Depends: R (>= 3.3.0), ggplot2
-Imports: rlang, MASS, stringr, tidyselect, scales, generics, magrittr,
-        tibble, tidyr, dplyr, purrr, labeling, ggrepel,
-Suggests: testthat, sessioninfo, gridExtra, mlpack, vegan, heplots,
-        knitr, rmarkdown
+Imports: rlang, cli, MASS, stringr, tidyselect, scales, generics,
+        magrittr, tibble, tidyr, dplyr, purrr, labeling, ggrepel, gggda
+Suggests: testthat, sessioninfo, gridExtra, mlpack, ddalpha, knitr,
+        rmarkdown
 License: GPL-3
 Encoding: UTF-8
 LazyData: true
-URL: https://github.com/corybrunson/ordr
+URL: https://github.com/corybrunson/ordr,
+        https://corybrunson.github.io/ordr/
 BugReports: https://github.com/corybrunson/ordr/issues
 RoxygenNote: 7.3.2
-Collate: 'aaa-.r' 'biplot-key.r' 'biplot.r' 'data.r' 'dplyr-verbs.r'
-        'utils.r' 'ord-recoverers.r' 'ord-augmentation.r'
-        'ord-conference.r' 'ord-tbl.r' 'fun-lda.r' 'fun-lra.r'
-        'fun-wrap.r' 'geom-axis.r' 'geom-intervals.r' 'geom-isoline.r'
-        'geom-origin.r' 'geom-text-radiate.r' 'geom-unit-circle.r'
-        'geom-utils.r' 'geom-vector.r' 'methods-base-eigen.r'
+Collate: 'aaa-.r' 'biplot-key.r' 'biplot.r' 'coord-scaffold.r' 'data.r'
+        'dplyr-verbs.r' 'utils.r' 'ord-recoverers.r'
+        'ord-augmentation.r' 'ord-conference.r' 'ord-tbl.r' 'fun-lda.r'
+        'fun-lra.r' 'fun-wrap.r' 'geom-interpolation.r' 'geom-origin.r'
+        'geom-utils.r' 'layer-utils.r' 'methods-base-eigen.r'
         'methods-base-svd.r' 'methods-mass-correspondence.r'
         'methods-mass-lda.r' 'methods-mass-mca.r' 'methods-ordr-lra.r'
         'methods-stats-cancor.r' 'methods-stats-cmds.r'
@@ -49,16 +51,16 @@ Collate: 'aaa-.r' 'biplot-key.r' 'biplot.r' 'data.r' 'dplyr-verbs.r'
         'methods-stats-lm.r' 'methods-stats-prcomp.r'
         'methods-stats-princomp.r' 'ord-annotation.r' 'ord-format.r'
         'ord-negation.r' 'ord-plot.r' 'ord-supplementation.r'
-        'ord-tidiers.r' 'ordinate.r' 'ordr.r' 'stat-center.r'
-        'stat-chull.r' 'stat-cone.r' 'stat-matrix.r' 'stat-scale.r'
-        'stat-spantree.r' 'themes.r' 'zzz-biplot-geoms.r'
-        'zzz-biplot-stats.r' 'zzz.r'
+        'ord-tidiers.r' 'ordinate.r' 'ordr.r' 'stat-matrix.r'
+        'stat-projection.r' 'stat-utils.r' 'theme-scaffold.r'
+        'zzz-biplot-geoms.r' 'zzz-biplot-stats.r' 'zzz.r'
 VignetteBuilder: knitr
 NeedsCompilation: no
-Packaged: 2025-07-02 00:13:45 UTC; jasoncorybrunson
+Packaged: 2025-07-10 18:38:17 UTC; jasoncorybrunson
 Author: Jason Cory Brunson [aut, cre] (ORCID:
     <https://orcid.org/0000-0003-3126-9494>),
-  Emily Paul [ctb]
+  Emily Paul [ctb],
+  John Gracey [aut]
 Maintainer: Jason Cory Brunson <cornelioid@gmail.com>
 Repository: CRAN
-Date/Publication: 2025-07-02 08:40:06 UTC
+Date/Publication: 2025-07-10 21:40:07 UTC

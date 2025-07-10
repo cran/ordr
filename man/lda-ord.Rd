@@ -28,8 +28,8 @@ lda_ord(x, ...)
   CV = FALSE,
   nu = 5,
   ...,
-  ret.x = FALSE,
-  ret.grouping = FALSE,
+  ret.x = TRUE,
+  ret.grouping = TRUE,
   axes.scale = "unstandardized"
 )
 
@@ -150,8 +150,8 @@ Output from \code{\link[MASS:lda]{MASS::lda()}} with an additional preceding \li
 }
 }
 \description{
-This function replicates \code{\link[MASS:lda]{MASS::lda()}} with options to retain
-elements useful to the \link{tbl_ord} class and biplot calculations.
+This function replicates \code{\link[MASS:lda]{MASS::lda()}} with options and defaults
+to retain elements useful to the \link{tbl_ord} class and biplot calculations.
 }
 \details{
 Linear discriminant analysis relies on an eigendecomposition of the product
@@ -185,6 +185,10 @@ derives from the eigendecomposition of the Mahalanobis distance matrix, the
 projections of the centroids and cases onto the variable axes approximate
 their variable values after centering and sphering (Greenacre, 2013).
 }
+
+Finally, in contrast to \code{\link[MASS:lda]{MASS::lda()}}, \code{lda_ord()} defaults both \code{ret.x} and
+\code{ret.grouping} to \code{TRUE}, so that these elements can be used to compute and
+annotate case scores as \link[=supplementation]{supplementary} elements.
 }
 \examples{
 # Anderson iris species data centroid
@@ -201,21 +205,14 @@ print(get_rows(iris_lda, elements = "active"))
 iris_lda \%>\%
   as_tbl_ord() \%>\%
   augment_ord() \%>\%
-  mutate_rows(
-    species = grouping,
-    discriminant = ifelse(.element == "active", "centroid", "case")
-  ) \%>\%
   ggbiplot() +
   theme_bw() +
-  geom_rows_point(aes(
-    color = grouping,
-    size = discriminant, alpha = discriminant
-  )) +
-  geom_cols_vector(color = "#888888") +
-  geom_cols_text_radiate(aes(label = name), size = 3) +
+  coord_scaffold() +
+  geom_rows_point(aes(color = grouping), elements = "score", alpha = 1/3) +
+  geom_rows_point(aes(color = grouping), size = 3) +
+  geom_cols_vector(aes(label = name), color = "#888888", size = 3) +
   scale_color_brewer(type = "qual", palette = 2) +
-  ggtitle("Unstandardized coefficient biplot of iris LDA") +
-  expand_limits(y = c(-3, 5))
+  ggtitle("Unstandardized coefficient biplot of iris LDA")
 
 # standardized discriminant coefficients: permit comparisons across the
 # variables
@@ -236,21 +233,14 @@ iris_lda \%>\%
 iris_lda \%>\%
   as_tbl_ord() \%>\%
   augment_ord() \%>\%
-  mutate_rows(
-    species = grouping,
-    discriminant = ifelse(.element == "active", "centroid", "case")
-  ) \%>\%
   ggbiplot() +
   theme_bw() +
-  geom_rows_point(aes(
-    color = grouping,
-    size = discriminant, alpha = discriminant
-  )) +
-  geom_cols_vector(color = "#888888") +
-  geom_cols_text_radiate(aes(label = name), size = 3) +
+  coord_scaffold() +
+  geom_rows_point(aes(color = grouping), elements = "score", alpha = 1/3) +
+  geom_rows_point(aes(color = grouping), size = 3) +
+  geom_cols_vector(aes(label = name), color = "#888888", size = 3) +
   scale_color_brewer(type = "qual", palette = 2) +
-  ggtitle("Standardized coefficient biplot of iris LDA") +
-  expand_limits(y = c(-2, 3))
+  ggtitle("Standardized coefficient biplot of iris LDA")
 
 # variable contributions (de-sphered discriminant coefficients): recover the
 # inner product relationship with the centered class centroids
@@ -267,21 +257,14 @@ print(sweep(iris_lda$means, 2, iris_centroid, "-") \%*\% C_W_sqrtinv)
 iris_lda \%>\%
   as_tbl_ord() \%>\%
   augment_ord() \%>\%
-  mutate_rows(
-    species = grouping,
-    discriminant = ifelse(.element == "active", "centroid", "case")
-  ) \%>\%
   ggbiplot() +
   theme_bw() +
-  geom_rows_point(aes(
-    color = grouping,
-    size = discriminant, alpha = discriminant
-  )) +
-  geom_cols_vector(color = "#888888") +
-  geom_cols_text_radiate(aes(label = name), size = 3) +
+  coord_scaffold() +
+  geom_rows_point(aes(color = grouping), elements = "score", alpha = 1/3) +
+  geom_rows_point(aes(color = grouping), size = 3) +
+  geom_cols_vector(aes(label = name), color = "#888888", size = 3) +
   scale_color_brewer(type = "qual", palette = 2) +
-  ggtitle("Contribution biplot of iris LDA") +
-  expand_limits(y = c(-2, 3.5))
+  ggtitle("Contribution biplot of iris LDA")
 }
 \references{
 Gardner S & le Roux NJ (2005) "Extensions of Biplot Methodology to
@@ -303,7 +286,7 @@ variable and Linear Discriminant Analysis". CrossValidated, accessed
 
 Greenacre M (2013) "Contribution Biplots". \emph{Journal of Computational and
 Graphical Statistics}, \strong{22}(1): 107--122.
-\url{https://www.tandfonline.com/doi/full/10.1080/10618600.2012.702494}
+\url{https://www.tandfonline.com/doi/abs/10.1080/10618600.2012.702494}
 }
 \seealso{
 \code{\link[MASS:lda]{MASS::lda()}}, from which \code{lda_ord()} is adapted

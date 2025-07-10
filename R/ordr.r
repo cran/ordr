@@ -81,6 +81,18 @@
 
 #' @name ordr
 #' @aliases ordr-package
+#' @keywords internal
+#'
+
+#' @section Acknowledgments:
+#'
+
+#' Many users have identified problems and suggested improvements.
+#'
+#' Development benefitted from the use of equipment and the support of
+#' colleagues at [UConn Health](https://health.uconn.edu/) and at [UF
+#' Health](https://ufhealth.org/).
+#' 
 "_PACKAGE"
 
 if (getRversion() >= "2.15.1") utils::globalVariables(c(

@@ -2,19 +2,29 @@
 % Please edit documentation in R/geom-origin.r
 \name{geom_origin}
 \alias{geom_origin}
-\title{Crosshairs or circle at the origin}
+\alias{geom_unit_circle}
+\title{Marker or unit circle at the origin}
 \usage{
 geom_origin(
   mapping = NULL,
   data = NULL,
-  stat = "identity",
-  position = "identity",
   marker = "crosshairs",
   radius = unit(0.04, "snpc"),
   ...,
   na.rm = FALSE,
   show.legend = NA,
-  inherit.aes = TRUE
+  inherit.aes = FALSE
+)
+
+geom_unit_circle(
+  mapping = NULL,
+  data = NULL,
+  segments = 60,
+  scale.factor = 1,
+  ...,
+  na.rm = FALSE,
+  show.legend = NA,
+  inherit.aes = FALSE
 )
 }
 \arguments{
@@ -38,32 +48,6 @@ the plot data. The return value must be a \code{data.frame}, and
 will be used as the layer data. A \code{function} can be created
 from a \code{formula} (e.g. \code{~ head(.x, 10)}).}
 
-\item{stat}{The statistical transformation to use on the data for this layer.
-When using a \verb{geom_*()} function to construct a layer, the \code{stat}
-argument can be used the override the default coupling between geoms and
-stats. The \code{stat} argument accepts the following:
-\itemize{
-\item A \code{Stat} ggproto subclass, for example \code{StatCount}.
-\item A string naming the stat. To give the stat as a string, strip the
-function name of the \code{stat_} prefix. For example, to use \code{stat_count()},
-give the stat as \code{"count"}.
-\item For more information and other ways to specify the stat, see the
-\link[ggplot2:layer_stats]{layer stat} documentation.
-}}
-
-\item{position}{A position adjustment to use on the data for this layer. This
-can be used in various ways, including to prevent overplotting and
-improving the display. The \code{position} argument accepts the following:
-\itemize{
-\item The result of calling a position function, such as \code{position_jitter()}.
-This method allows for passing extra arguments to the position.
-\item A string naming the position adjustment. To give the position as a
-string, strip the function name of the \code{position_} prefix. For example,
-to use \code{position_jitter()}, give the position as \code{"jitter"}.
-\item For more information and other ways to specify the position, see the
-\link[ggplot2:layer_positions]{layer position} documentation.
-}}
-
 \item{marker}{The symbol to be drawn at the origin; matched to \code{"crosshairs"}
 or \code{"circle"}.}
 
@@ -84,13 +68,20 @@ display.}
 rather than combining with them. This is most useful for helper functions
 that define both data and aesthetics and shouldn't inherit behaviour from
 the default plot specification, e.g. \code{\link[ggplot2:borders]{borders()}}.}
+
+\item{segments}{The number of segments to be used in drawing the circle.}
+
+\item{scale.factor}{The circle radius; should remain at its default value 1
+or passed the same value as \code{\link[=ggbiplot]{ggbiplot()}}. (This is an imperfect fix that
+may be changed in a future version.)}
 }
 \value{
 A ggproto \link[ggplot2:layer]{layer}.
 }
 \description{
 \code{geom_origin()} renders a symbol, either a set of crosshairs or
-a circle, at the origin.
+a circle, at the origin. \code{geom_unit_circle()} renders the unit circle,
+centered at the origin with radius 1.
 }
 \section{Biplot layers}{
 
@@ -108,15 +99,48 @@ points for rows and arrows for columns.
 \section{Aesthetics}{
 
 \code{geom_origin()} accepts no aesthetics.
+\code{geom_unit_circle()} understands the following aesthetics (none required):
+\itemize{
+\item \code{linetype}
+\item \code{linewidth}
+\item \code{colour}
+\item \code{alpha}
+}
 }
 
+\examples{
+ggplot(seals, aes(delta_long, delta_lat)) +
+  theme_void() +
+  geom_origin() +
+  geom_point(alpha = .25)
+# center each group separately
+iris \%>\%
+  split(~ Species) \%>\%
+  lapply(subset, select = -c(Species)) \%>\%
+  lapply(scale, center = TRUE, scale = FALSE) \%>\%
+  lapply(as.data.frame) \%>\%
+  unsplit(iris$Species) \%>\%
+  transform(Species = iris$Species) ->
+  iris_ctr
+ggplot(iris_ctr, aes(Petal.Width, Petal.Length)) +
+  coord_equal() +
+  facet_wrap(vars(Species)) +
+  geom_unit_circle() +
+  geom_point()
+# scale group mean differences uniformly
+iris_ctr \%>\%
+  subset(select = -c(Species)) \%>\%
+  scale(center = FALSE, scale = TRUE) \%>\%
+  transform(Species = iris$Species) \%>\%
+  ggplot(aes(Petal.Width, Petal.Length)) +
+  coord_equal() +
+  facet_wrap(vars(Species)) +
+  geom_unit_circle() +
+  geom_point()
+
+}
 \seealso{
 Other geom layers: 
-\code{\link{geom_axis}()},
-\code{\link{geom_isoline}()},
-\code{\link{geom_lineranges}()},
-\code{\link{geom_text_radiate}()},
-\code{\link{geom_unit_circle}()},
-\code{\link{geom_vector}()}
+\code{\link{geom_interpolation}()}
 }
 \concept{geom layers}

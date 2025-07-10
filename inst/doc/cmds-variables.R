@@ -4,8 +4,10 @@ knitr::opts_chunk$set(
   fig.height = 6, fig.align = "center"
 )
 
-## ----diabetes pca-------------------------------------------------------------
-x <- scale(heplots::Diabetes[, -6L], center = TRUE, scale = TRUE)
+## ----glass pca----------------------------------------------------------------
+data(glass, package = "ordr")
+x <- scale(glass[, c("SiO2", "Al2O3", "FeO", "MgO", "CaO")],
+           center = TRUE, scale = TRUE)
 s <- svd(x)
 r <- length(s$d)
 
@@ -27,12 +29,12 @@ s.dist <- dist(s$u[, 1:2] %*% diag(s$d[1:2]))
 plot(
   x = as.vector(x.dist),
   y = as.vector(s.dist),
-  xlim = c(0, 8), ylim = c(0, 8),
+  xlim = c(0, 10), ylim = c(0, 10),
   asp = 1, pch = 19, cex = .5,
   xlab = "Case distances in centered and scaled data",
   ylab = "Case point distances in planar biplot"
 )
-lines(x = c(0, 8), y = c(0, 8))
+lines(x = c(0, 10), y = c(0, 10))
 
 ## ----variable geometry, fig.width=5.5-----------------------------------------
 # correlations between variables
@@ -76,7 +78,7 @@ plot(
 )
 text(d.coord, labels = rownames(d), cex = .9)
 
-## ----multidimensional scaling of diabetes, fig.width=5.5----------------------
+## ----multidimensional scaling of glass, fig.width=5.5-------------------------
 # covariances and standard deviations
 c <- cov(x)
 s <- diag(sqrt(diag(c)))
@@ -96,8 +98,8 @@ plot(
 )
 lines(x = range(c[lower.tri(c)]), y = range(c[lower.tri(c)]))
 
-## ----multidimensional scaling of diabetes plot, fig.width=7-------------------
-c <- cor(heplots::Diabetes[, -6L])
+## ----multidimensional scaling of glass plot, fig.width=7----------------------
+c <- cor(glass[, c("SiO2", "Al2O3", "FeO", "MgO", "CaO")])
 c.eigen <- eigen(c)
 c.coord <- c.eigen$vectors[, 1:2] %*% diag(sqrt(c.eigen$values[1:2]))
 plot(
@@ -112,7 +114,7 @@ library(ordr)
 library(dplyr)
 
 ## ----QS top university rankings-----------------------------------------------
-data(qswur_usa)
+data(qswur_usa, package = "ordr")
 print(qswur_usa)
 
 ## ----calibrate rankings-------------------------------------------------------
@@ -149,8 +151,7 @@ c_eigen %>%
   ggbiplot() +
   theme_minimal() +
   geom_unit_circle() +
-  geom_rows_vector() +
-  geom_rows_text_radiate(aes(label = metric)) +
+  geom_rows_vector(aes(label = metric)) +
   scale_x_reverse(expand = expansion(add = .4)) +
   scale_y_continuous(expand = expansion(add = .3)) +
   ggtitle("Kendall correlations between university rankings",
@@ -166,8 +167,7 @@ c_eigen %>%
   ggbiplot(aes(x = 2, y = 3)) +
   theme_minimal() +
   geom_unit_circle() +
-  geom_rows_vector() +
-  geom_rows_text_radiate(aes(label = metric)) +
+  geom_rows_vector(aes(label = metric)) +
   scale_x_continuous(expand = expansion(add = .5)) +
   scale_y_continuous(expand = expansion(add = .5)) +
   ggtitle("Kendall correlations between university rankings",
